@@ -1,7 +1,51 @@
+import google.generativeai as genai
 import os
 import subprocess
 import requests
 import json
+
+# https://ai.google.dev/gemini-api/docs/vision?lang=python#prompting-video
+# https://github.com/google-gemini/cookbook/tree/main/gemini-2
+
+# Set your Google API key
+GOOGLE_API_KEY = "your-generative-ai-api-key"  # Replace with your actual API key
+genai.configure(api_key=GOOGLE_API_KEY)
+
+model = genai.GenerativeModel('gemini-pro-vision')
+
+"""
+# Option 1: Load video from file path
+def prompt_with_video_from_path(video_path, prompt_text):
+    #Prompts Gemini with a video loaded from a file path.
+    with open(video_path, "rb") as f:
+        video_data = f.read()
+
+    video_part = genai.types.Part(
+        mime_type='video/mp4',
+        data=video_data
+    )
+    prompt = genai.Content(
+        parts=[prompt_text, video_part]
+    )
+    response = model.generate_content(prompt)
+    print(response.text)
+    return response
+
+
+# Option 2: Load video as bytes
+def prompt_with_video_bytes(video_bytes, prompt_text):
+    #Prompts Gemini with a video loaded as bytes.
+    video_part = genai.types.Part(
+        mime_type='video/mp4',
+        data=video_bytes
+    )
+    prompt = genai.Content(
+        parts=[prompt_text, video_part]
+    )
+    response = model.generate_content(prompt)
+    print(response.text)
+    return response
+"""
 
 def install_latest_nightly():
     """Install the latest nightly build of yt-dlp using pip."""
