@@ -9,8 +9,8 @@ def install_latest_nightly():
     subprocess.run(command, check=True)
     print("yt-dlp nightly build installed successfully.")
 
-def download_youtube_video(url, output_path):
-    """Download a YouTube video using yt-dlp and save it locally."""
+def download_yt_video(url, output_path):
+    """Download a yt video using yt-dlp and save it locally."""
     os.makedirs(output_path, exist_ok=True)
     output_file = os.path.join(output_path, "video.webm")
     command = [
@@ -58,14 +58,14 @@ if __name__ == "__main__":
     install_latest_nightly()
 
     # Input values
-    youtube_url = input("Enter the YouTube URL: ")
+    yt_url = input("Enter the yt URL: ")
     output_directory = "output"
     gemini_api_url = "https://gemini-api.example.com/extract"  # Replace with actual API URL
 
     try:
-        # Step 1: Download YouTube video
+        # Step 1: Download yt video
         print("Downloading video...")
-        video_path = download_youtube_video(youtube_url, output_directory)
+        video_path = download_yt_video(yt_url, output_directory)
         print(f"Video downloaded to {video_path}")
 
         # Step 2: Send video to GEMINI API
