@@ -92,6 +92,7 @@ def process_video_with_ffmpeg(video_path, timestamps, output_dir):
             "-vf", "fps=1",
             "-c:v", "libvpx",
             "-pix_fmt", "yuv420p",
+            "--ffmpeg-location", "PATH-TO-FFMPEG",
             output_file
         ]
 
