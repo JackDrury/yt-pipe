@@ -61,6 +61,7 @@ def download_yt_video(url, output_path):
         "yt-dlp",
         "-f", "bestvideo+bestaudio",
         "--merge-output-format", "webm",
+        "--ffmpeg-location", "PATH-TO-FFMPEG",
         "-o", output_file,
         url
     ]
@@ -92,7 +93,6 @@ def process_video_with_ffmpeg(video_path, timestamps, output_dir):
             "-vf", "fps=1",
             "-c:v", "libvpx",
             "-pix_fmt", "yuv420p",
-            "--ffmpeg-location", "PATH-TO-FFMPEG",
             output_file
         ]
 
