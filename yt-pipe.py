@@ -75,6 +75,8 @@ def send_to_gemini_api(video_path, api_url):
         response.raise_for_status()
         return response.json()  # Assuming the API returns JSON with timestamps
 
+#TODO: To do lossless slowdown with ffmpeg is actually a two step process referred to as the raw bitstream method at the following link:
+# https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video
 def process_video_with_ffmpeg(video_path, timestamps, output_dir):
     """Cut the video into snippets based on timestamps and slow down to 1 FPS using FFmpeg."""
     os.makedirs(output_dir, exist_ok=True)
@@ -83,7 +85,7 @@ def process_video_with_ffmpeg(video_path, timestamps, output_dir):
         start = event['start']
         end = event['end']
         output_file = os.path.join(output_dir, f"snippet_{i+1}.webm")
-
+# TODO: Consider how slowing down the audio (or not) will impact the results? Will gemini be able to understand slow audio? Does it even use the audio? maybe doesn't need it?
         # Extract snippet and slow down to 1 FPS
         command = [
             "ffmpeg",
