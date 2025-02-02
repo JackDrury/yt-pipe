@@ -75,9 +75,6 @@ def send_to_gemini_api(video_path, api_url):
         response.raise_for_status()
         return response.json()  # Assuming the API returns JSON with timestamps
 
-#TODO: To do lossless slowdown with ffmpeg is actually a two step process referred to as the raw bitstream method at the following link:
-# https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video
-
 #Note: you can count the number of frames before/after with ffmpeg -i input.webm -vf "showinfo" -f null - 2>&1 | grep "frame"
 def process_video_with_ffmpeg(video_path, timestamps, output_dir):
     """Cut the video into snippets based on timestamps and slow down to 1 FPS using FFmpeg."""
@@ -94,9 +91,7 @@ def process_video_with_ffmpeg(video_path, timestamps, output_dir):
             "-i", video_path,
             "-ss", str(start),
             "-to", str(end),
-            "-vf", "fps=1",
-            "-c:v", "libvpx",
-            "-pix_fmt", "yuv420p",
+            "-filter:v", "setpts=5.0*PTS", # slows down 5x
             output_file
         ]
 
