@@ -77,6 +77,8 @@ def send_to_gemini_api(video_path, api_url):
 
 #TODO: To do lossless slowdown with ffmpeg is actually a two step process referred to as the raw bitstream method at the following link:
 # https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video
+
+#Note: you can count the number of frames before/after with ffmpeg -i input.webm -vf "showinfo" -f null - 2>&1 | grep "frame"
 def process_video_with_ffmpeg(video_path, timestamps, output_dir):
     """Cut the video into snippets based on timestamps and slow down to 1 FPS using FFmpeg."""
     os.makedirs(output_dir, exist_ok=True)
